@@ -13,8 +13,7 @@ repo, then from the project root pick one of the two paths below.
 ### Path A — Standard npm (recommended, works on any OS)
 
 ```bash
-npm install
-npm start
+npm install && npm start
 ```
 
 ### Path B — Makefile shortcut (if you already have `make` and `nvm`)

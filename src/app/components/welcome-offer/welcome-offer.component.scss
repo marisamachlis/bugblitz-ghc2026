@@ -1,0 +1,126 @@
+.offer-popover {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 900;
+  width: min(360px, calc(100vw - 48px));
+  padding: 28px;
+  border: 1px solid #d8ccc4;
+  border-radius: 16px;
+  background: #fffdf9;
+  box-shadow: 0 16px 48px rgba(27, 67, 50, 0.2);
+}
+.offer-eyebrow {
+  margin: 0 36px 8px 0;
+  color: #7a9e97;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+h2 {
+  margin: 0 32px 10px 0;
+  color: #1b4332;
+  font-size: 24px;
+  line-height: 1.15;
+}
+.offer-copy {
+  margin: 0 0 20px;
+  color: #52796f;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.offer-cta,
+.consent-banner button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  background: #2d6a4f;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.offer-cta {
+  min-height: 40px;
+  padding: 0 18px;
+}
+.offer-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f0ebe4;
+  color: #52796f;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+.consent-banner {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 500px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #1b4332;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+.consent-banner p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.consent-banner button {
+  flex: 0 0 auto;
+  min-height: 32px;
+  padding: 0 12px;
+  background: #fff;
+  color: #1b4332;
+}
+@media (max-width: 768px) {
+  .offer-popover {
+    right: 16px;
+    bottom: 84px;
+    width: calc(100vw - 32px);
+    padding: 24px 22px;
+  }
+  .offer-close {
+    top: auto;
+    bottom: 14px;
+    right: 14px;
+  }
+  .consent-banner {
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    border-radius: 0;
+    padding: 16px 16px 40px;
+  }
+  .consent-banner button {
+    width: 100%;
+    min-height: 40px;
+  }
+}

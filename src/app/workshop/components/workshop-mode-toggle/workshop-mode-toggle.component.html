@@ -1,0 +1,81 @@
+<!-- 
+============================================================================
+ℹ️ WORKSHOP SETUP: Toggle between Mock or Live data.
+⚠️ DO NOT LOOK HERE FOR BUGS: This file is part of the workshop setup, not the exercise challenges!
+============================================================================ 
+-->
+<div class="mode-dropdown-container" [class.inline]="inline">
+    <button
+    type="button"
+    class="mock-badge"
+    [class.active-mock]="apiMode.mock()"
+    [class.active-supabase]="!apiMode.mock()"
+    [class.is-open]="isPopoverOpen()"
+    (click)="isPopoverOpen.set(!isPopoverOpen())"
+    [title]="apiMode.mock() ? 'Connected to the local mock API server' : 'Connected to live Supabase backend'"
+    [attr.aria-label]="apiMode.mock() ? 'Workshop Mode: Mock API' : 'Workshop Mode: Live Supabase'"
+    aria-haspopup="true"
+    [attr.aria-expanded]="isPopoverOpen()"
+    >
+    <span class="mode-label-full" aria-hidden="true">{{ apiMode.mock() ? '🟠 Workshop Mode: Mock API' : '🟢 Workshop Mode: Live Supabase' }}</span>
+    <span class="mode-label-compact" aria-hidden="true">{{ apiMode.mock() ? '🟠 Mode: Mock API' : '🟢 Mode: Live Data' }}</span>
+    <span class="badge-caret-wrapper">
+        <svg 
+        class="badge-caret-icon" 
+        viewBox="0 0 20 20" 
+        fill="currentColor" 
+        aria-hidden="true"
+        >
+        <path 
+            fill-rule="evenodd" 
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" 
+            clip-rule="evenodd" 
+        />
+        </svg>
+    </span>
+    </button>
+
+    @if (isPopoverOpen()) {
+    <div class="mode-popover">
+        <div class="popover-title">Data Source Configuration</div>
+        
+        <p class="popover-desc">
+        @if (apiMode.mock()) {
+            Running on the local mock API server. Orders are kept in memory and reset when the server restarts.
+        } @else {
+            Connected directly to live Supabase tables. Database updates are shared with your team.
+        }
+        </p>
+
+        <hr class="popover-divider" />
+
+        @if (!apiMode.mock()) {
+        <div class="action-card mock-target">
+            <span class="card-label">
+            ⚠️ Network requests blocked by a firewall or VPN policy?
+            </span>
+            <button
+            type="button"
+            class="switch-mode-btn btn-amber"
+            (click)="switchMode(true)"
+            >
+            Switch to Mock API
+            </button>
+        </div>
+        } @else {
+        <div class="action-card supabase-target">
+            <span class="card-label">
+            🌐 On a personal laptop or unrestricted network?
+            </span>
+            <button
+            type="button"
+            class="switch-mode-btn btn-green"
+            (click)="switchMode(false)"
+            >
+            Switch to Live Supabase
+            </button>
+        </div>
+        }
+    </div>
+    }
+</div>

@@ -1,0 +1,29 @@
+{
+  "name": "angular-starter",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start": "node workshop/dev-mock.mjs",
+    "build": "ng build",
+    "dev:mock-server": "node workshop/mock-api-server.mjs",
+    "dev:ui-only": "echo '⚠️ WARNING: Mock API server is NOT running. Run \"npm start\" instead if you need local mock mode.' && ng serve"
+  },
+  "dependencies": {
+    "@angular/common": "^21.1.0",
+    "@angular/compiler": "^21.1.0",
+    "@angular/core": "^21.1.0",
+    "@angular/forms": "^21.1.0",
+    "@angular/platform-browser": "^21.1.0",
+    "@angular/router": "^21.1.0",
+    "@supabase/supabase-js": "^2.49.4",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.1.0",
+    "@angular/cli": "^21.1.0",
+    "@angular/compiler-cli": "^21.1.0",
+    "@types/node": "^25.8.0",
+    "typescript": "^5.9.3"
+  }
+}

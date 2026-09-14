@@ -1,0 +1,166 @@
+.product-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e8e0d8;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(45, 106, 79, 0.10);
+  }
+
+  &.out-of-stock {
+    opacity: 0.65;
+  }
+}
+
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f0ebe4;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .product-card:hover & img {
+    transform: scale(1.04);
+  }
+}
+
+.sale-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #c0392b;
+  color: white;
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.stock-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1b4332;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.card-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1b4332;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.compare-price {
+  font-size: 13px;
+  font-weight: 400;
+  color: #a8bdb6;
+  text-decoration: line-through;
+}
+
+.card-description {
+  font-size: 12.5px;
+  color: #5a7a6e;
+  line-height: 1.5;
+  margin: 0 0 10px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+
+  .product-card:hover & {
+    max-height: 100px;
+    opacity: 1;
+  }
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+
+.tag-green {
+  background: #e8f5ee;
+  color: #2d6a4f;
+  border-color: #b7ddc9;
+}
+
+.tag-blue {
+  background: #e8f1f8;
+  color: #1a5276;
+  border-color: #b3cde0;
+}
+
+.tag-amber {
+  background: #fef5e7;
+  color: #8a5200;
+  border-color: #f5cba7;
+}
+
+.add-btn {
+  width: 100%;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) {
+    background: #1b4332;
+  }
+
+  &:disabled {
+    background: #c8bdb5;
+    cursor: not-allowed;
+  }
+}

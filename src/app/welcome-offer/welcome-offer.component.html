@@ -1,0 +1,18 @@
+@if (isOpen()) {
+  <section class="offer-popover" aria-labelledby="offer-title">
+    <button class="offer-close" type="button" (click)="closeOffer()" aria-label="Close welcome offer">
+      &#10005;
+    </button>
+    <p class="offer-eyebrow">A little something for your first plant</p>
+    <h2 id="offer-title">Take 10% off your first order</h2>
+    <p class="offer-copy">Use code <strong>WELCOME10</strong> at checkout. Your new leafy roommate will thank you.</p>
+    <a class="offer-cta" routerLink="/shop" (click)="closeOffer()">Start shopping</a>
+  </section>
+}
+
+@if (cookiesVisible()) {
+  <aside class="consent-banner" aria-label="Cookie notice">
+    <p>We use cookies to make The Green Nook grow better.</p>
+    <button type="button" (click)="acceptCookies()">Got it</button>
+  </aside>
+}

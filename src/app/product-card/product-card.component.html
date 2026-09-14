@@ -1,0 +1,32 @@
+<div class="product-card" [class.out-of-stock]="!product.in_stock">
+  <div class="card-image">
+    <img [src]="product.image_url" [alt]="product.name" loading="lazy" />
+    @if (product.compare_at_price) {
+      <span class="sale-badge">Sale</span>
+    }
+    @if (!product.in_stock) {
+      <span class="stock-badge">Out of Stock</span>
+    }
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{{ product.name }}</h3>
+    <p class="card-price">${{ product.price.toFixed(2) }}
+      @if (product.compare_at_price) {
+        <span class="compare-price">${{ product.compare_at_price.toFixed(2) }}</span>
+      }
+    </p>
+    <p class="card-description">{{ product.description }}</p>
+    <div class="card-tags">
+      @for (tag of visibleTags; track tag.label) {
+        <span class="tag" [class]="'tag-' + tag.color">{{ tag.label }}</span>
+      }
+    </div>
+    <button
+      class="add-btn"
+      (click)="addToCart()"
+      [disabled]="!product.in_stock"
+    >
+      Add to Cart
+    </button>
+  </div>
+</div>

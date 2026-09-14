@@ -1,0 +1,52 @@
+<header class="app-header">
+  <div class="header-inner">
+    <a routerLink="/" class="logo">THE GREEN NOOK</a>
+
+    <nav class="main-nav">
+      <a routerLink="/shop" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">Shop All</a>
+      <a routerLink="/plants" routerLinkActive="active" class="nav-item">Plants</a>
+      <a routerLink="/shop" [queryParams]="{sort: 'new'}" class="nav-item" [class.active]="isActive('new')">New Arrivals</a>
+      <a routerLink="/shop" [queryParams]="{sort: 'popular'}" class="nav-item" [class.active]="isActive('popular')">Popular</a>
+      <a routerLink="/care" routerLinkActive="active" class="nav-item">Care</a>
+      <a routerLink="/shop" [queryParams]="{sort: 'sale'}" class="nav-item sale-link" [class.active]="isActive('sale')">Sale</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="search-wrap">
+        <span class="search-icon">&#128269;</span>
+        <input
+          type="text"
+          placeholder="Search plants..."
+          class="search-input"
+          [(ngModel)]="searchValue"
+          (ngModelChange)="onSearchChange($event)"
+          (keydown.enter)="onSearchEnter()"
+        />
+        @if (searchLoading() || searchResults().length > 0) {
+          <div class="search-results" role="listbox">
+            @if (searchLoading()) {
+              <div class="search-status">Searching…</div>
+            }
+            @for (product of searchResults(); track product.id) {
+              <button
+                type="button"
+                class="search-result"
+                role="option"
+                (click)="selectSearchResult(product)"
+              >
+                <span>{{ product.name }}</span>
+                <span class="search-result-price">{{ product.price | currency }}</span>
+              </button>
+            }
+          </div>
+        }
+      </div>
+      <a routerLink="/cart" class="cart-link">
+        <span class="cart-icon">&#128722;</span>
+        @if (cartCount() > 0) {
+          <span class="cart-badge">{{ cartCount() }}</span>
+        }
+      </a>
+    </div>
+  </div>
+</header>

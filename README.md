@@ -3,7 +3,7 @@
 An Angular storefront for house plants and care supplies, backed by a shared
 Supabase database.
 
-For more information, check out the Bug Blitz guide: https://dianagracie.github.io/2026-Workshop-Guide/index.html.
+For more information, check out the Bug Blitz guide: https://dianagracie.github.io/bugblitz-guide-ghc2026/index.html.
 
 ## Run locally
 
@@ -131,7 +131,7 @@ initialized once per page load.
 
 ## Try it in StackBlitz
 
-Don't want to set up a local Node environment? We have an option to run the project in StackBlitz instead (recommended if you want a quick start option). Check out the [Set Up Guide](https://dianagracie.github.io/2026-Workshop-Guide/index.html#setup) for details.
+Don't want to set up a local Node environment? We have an option to run the project in StackBlitz instead (recommended if you want a quick start option). Check out the [Set Up Guide](https://dianagracie.github.io/bugblitz-guide-ghc2026/index.html#setup) for details.
 
 ## Project layout
 

@@ -8,14 +8,32 @@ For more information, check out the Bug Blitz guide: https://dianagracie.github.
 ## Run locally
 
 You need **Node ≥ 22** (which comes with npm) and internet access. Clone this
-repo, then from the project root run:
+repo, then from the project root pick one of the two paths below.
+
+### Path A — Standard npm (recommended, works on any OS)
 
 ```bash
 npm install
 npm start
 ```
 
-Then open **http://localhost:4200** (add `?team=<id>` to load a specific team — see [Switching teams](#switching-teams) below).
+### Path B — Makefile shortcut (if you already have `make` and `nvm`)
+
+The repo also ships a `Makefile` that wraps `nvm install` (using `.nvmrc`),
+dependency install, and the dev server in one go:
+
+```bash
+make setup && make dev
+```
+
+This works well when both tools are set up. It **may not work** depending on
+your environment — missing `make`, no `nvm`, non-Unix shell, or corporate
+restrictions — so if it errors, fall back to Path A.
+
+### After either path
+
+Open **http://localhost:4200** (add `?team=<id>` to load a specific team — see
+[Switching teams](#switching-teams) below).
 
 If you don't want to set up a local node environment, see [Try it in StackBlitz](#try-it-in-stackblitz) below.
 
@@ -81,6 +99,18 @@ npm start         # start the dev server at http://localhost:4200
 | `npm install`   | Install project dependencies |
 | `npm start`     | Start Angular dev server at http://localhost:4200 |
 | `npm run build` | Production build |
+
+### Make targets (Path B only)
+
+If Path B works for you, these additional Make targets are available:
+
+| Target        | What it does |
+|---------------|--------------|
+| `make setup`  | Verify Node ≥ 22 (or install via nvm) and `npm install` |
+| `make dev`    | Start Angular dev server at http://localhost:4200 |
+| `make build`  | Production build |
+| `make clean`  | Remove `node_modules` and `package-lock.json` |
+| `make`        | Show available targets |
 
 ## Switching teams
 

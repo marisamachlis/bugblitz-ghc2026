@@ -7,11 +7,12 @@ For more information, check out the Bug Blitz guide: https://dianagracie.github.
 
 ## Run locally
 
-You need **Node ≥ 22** (which comes with npm) and internet access. If you
-already have those, this is a single command:
+You need **Node ≥ 22** (which comes with npm) and internet access. Clone this
+repo, then from the project root run:
 
 ```bash
-make setup && make dev
+npm install
+npm start
 ```
 
 Then open **http://localhost:4200** (add `?team=<id>` to load a specific team — see [Switching teams](#switching-teams) below).
@@ -20,37 +21,39 @@ If you don't want to set up a local node environment, see [Try it in StackBlitz]
 
 ### Never installed Node before?
 
-The recommended path is [nvm](https://github.com/nvm-sh/nvm), which reads the
-project's `.nvmrc` and picks the right Node version automatically. Pick one
-install method:
+**Easiest:** download and run the installer from [nodejs.org](https://nodejs.org/) — first-party installers for macOS (`.pkg`), Windows (`.msi`), and Linux. Pick the LTS release (currently 22.x). After it finishes, open a new terminal, then `cd` into the project root and run `npm install && npm start`.
 
-**A. Upstream installer (personal machines)**
+**If you want to manage multiple Node versions**, use a version manager. The project ships a `.nvmrc` file so version managers pick the right Node version automatically.
+
+**macOS / Linux — [nvm](https://github.com/nvm-sh/nvm):**
+
+Pick one install method:
+
+*A. Upstream installer (personal machines)*
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 ```
 
 The URL is from the official [nvm-sh/nvm](https://github.com/nvm-sh/nvm) repo,
-pinned to a git tag.
+pinned to a git tag. If you'd rather read the script first:
 
 ```bash
 curl -o /tmp/nvm-install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
-less /tmp/nvm-install.sh    # to read file
+less /tmp/nvm-install.sh    # inspect
 bash /tmp/nvm-install.sh
 ```
 
-**B. Homebrew (corporate / managed machines)**
+*B. Homebrew (corporate / managed machines)*
 
-If your machine restricts `curl | bash` installs, or you already
-manage tools with Homebrew, this works too:
+If your machine restricts `curl | bash` installs, or you already manage tools with Homebrew:
 
 ```bash
 brew install nvm
 mkdir -p "$HOME/.nvm"
 ```
 
-Then add these lines to your `~/.zshrc` (or `~/.bashrc`) so nvm loads in every
-shell:
+Then add these lines to your `~/.zshrc` (or `~/.bashrc`) so nvm loads in every shell:
 
 ```bash
 export NVM_DIR="$HOME/.nvm"
@@ -58,26 +61,26 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"
 ```
 
-**After either method:** open a new terminal so nvm loads, then:
+**Windows — [nvm-windows](https://github.com/coreybutler/nvm-windows):**
+
+Download the installer from the [releases page](https://github.com/coreybutler/nvm-windows/releases) and run it. Open a new PowerShell or Command Prompt window afterwards so `nvm` is on your PATH.
+
+**After installing a version manager:** open a new terminal, then from the project root:
 
 ```bash
-cd path/to/bugblitz-kcqdkxy4
-make setup && make dev
+nvm install       # reads .nvmrc, installs the right Node version
+nvm use           # activates it in the current shell
+npm install       # install project dependencies
+npm start         # start the dev server at http://localhost:4200
 ```
 
-`make setup` will run `nvm install` (using `.nvmrc`), install project deps,
-and then `make dev` starts the dev server. If Node is missing or too old,
-`make` prints a clear instruction telling you what to do.
+### npm scripts
 
-### Make targets
-
-| Target        | What it does |
-|---------------|--------------|
-| `make setup`  | Verify Node ≥ 22 (or install via nvm) and `npm install` |
-| `make dev`    | Start Angular dev server at http://localhost:4200 |
-| `make build`  | Production build |
-| `make clean`  | Remove `node_modules` and `package-lock.json` |
-| `make`        | Show available targets |
+| Command         | What it does |
+|-----------------|--------------|
+| `npm install`   | Install project dependencies |
+| `npm start`     | Start Angular dev server at http://localhost:4200 |
+| `npm run build` | Production build |
 
 ## Switching teams
 

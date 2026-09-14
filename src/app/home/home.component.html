@@ -1,0 +1,82 @@
+<div class="home-page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Welcome to The Green Nook</p>
+      <h1 class="hero-title">Bring nature home.</h1>
+      <p class="hero-sub">Handpicked plants and everything they need to thrive.</p>
+      <a routerLink="/shop" class="hero-cta">Shop All</a>
+    </div>
+  </section>
+
+  <!-- Plants Carousel -->
+  <section class="carousel-section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Our Plants</h2>
+        <p class="section-sub">Curated for every space and lifestyle.</p>
+      </div>
+      <a routerLink="/plants" class="view-all">View All &rarr;</a>
+    </div>
+
+    @if (plantsLoading()) {
+      <div class="loading-state">Loading plants...</div>
+    } @else {
+      <div class="carousel-wrap">
+        <button class="carousel-btn prev" (click)="scrollPlants(-1)" aria-label="Scroll left">&#8249;</button>
+        <div class="carousel-track" #plantsTrack (scroll)="onPlantsScroll()">
+          @for (product of plants(); track product.id) {
+            <div class="carousel-item">
+              <app-product-card [product]="product" />
+            </div>
+          }
+        </div>
+        <button class="carousel-btn next" (click)="scrollPlants(1)" aria-label="Scroll right">&#8250;</button>
+      </div>
+    }
+  </section>
+
+  <!-- Care Supplies Carousel -->
+  <section class="carousel-section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Plant Care Supplies</h2>
+        <p class="section-sub">Tools, pots, and soils for happy, healthy plants.</p>
+      </div>
+      <a routerLink="/care" class="view-all">View All &rarr;</a>
+    </div>
+
+    @if (suppliesLoading()) {
+      <div class="loading-state">Loading supplies...</div>
+    } @else {
+      <div class="carousel-wrap">
+        <button class="carousel-btn prev" (click)="scrollCare(-1)" aria-label="Scroll left">&#8249;</button>
+        <div class="carousel-track" #careTrack (scroll)="onCareScroll()">
+          @for (item of supplies(); track item.id) {
+            <div class="carousel-item">
+              <div class="supply-card" [class.out-of-stock]="!item.in_stock">
+                <div class="supply-image">
+                  <img [src]="item.image_url" [alt]="item.name" loading="lazy" />
+                  @if (!item.in_stock) {
+                    <span class="stock-badge">Out of Stock</span>
+                  }
+                </div>
+                <div class="supply-body">
+                  <h3 class="supply-name">{{ item.name }}</h3>
+                  <p class="supply-price">${{ item.price.toFixed(2) }}</p>
+                  <p class="supply-desc">{{ item.description }}</p>
+                  <button class="add-btn" [disabled]="!item.in_stock" (click)="addSupplyToCart(item)">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        <button class="carousel-btn next" (click)="scrollCare(1)" aria-label="Scroll right">&#8250;</button>
+      </div>
+    }
+  </section>
+
+</div>

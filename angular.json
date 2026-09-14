@@ -1,0 +1,99 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "1e1de97b-a744-405a-8b5a-0397bb3d01ce"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "demo": {
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "configurations": {
+            "development": {
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true,
+              "define": {
+                "import.meta.env.VITE_SUPABASE_URL": "\"https://iocmdksopnremrgaocfq.supabase.co\"",
+                "import.meta.env.VITE_SUPABASE_ANON_KEY": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvY21ka3NvcG5yZW1yZ2FvY2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjI2MzQsImV4cCI6MjA5NzYzODYzNH0.uy3VWF4C1nugJ-ElgQDyCJ-7_tTmJIpwtMC3HLGXvWw\""
+              }
+            },
+            "production": {
+              "extractLicenses": true,
+              "namedChunks": false,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "define": {
+                "import.meta.env.VITE_SUPABASE_URL": "\"https://iocmdksopnremrgaocfq.supabase.co\"",
+                "import.meta.env.VITE_SUPABASE_ANON_KEY": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvY21ka3NvcG5yZW1yZ2FvY2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNjI2MzQsImV4cCI6MjA5NzYzODYzNH0.uy3VWF4C1nugJ-ElgQDyCJ-7_tTmJIpwtMC3HLGXvWw\""
+              }
+            }
+          },
+          "options": {
+            "externalDependencies": [
+              "fs",
+              "fs/promises",
+              "path",
+              "util",
+              "zlib",
+              "module",
+              "stream",
+              "stream/promises"
+            ],
+            "loader": {
+              ".sql": "text"
+            },
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "*.wasm",
+                "input": "node_modules/@electric-sql/pglite/dist",
+                "output": "assets/pglite"
+              },
+              {
+                "glob": "*.data",
+                "input": "node_modules/@electric-sql/pglite/dist",
+                "output": "assets/pglite"
+              }
+            ],
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "outputPath": "dist/demo",
+            "polyfills": [],
+            "scripts": [],
+            "styles": [
+              "src/global_styles.css"
+            ],
+            "tsConfig": "tsconfig.app.json"
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "development": {
+              "buildTarget": "demo:build:development"
+            },
+            "production": {
+              "buildTarget": "demo:build:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {},
+      "sourceRoot": "src"
+    }
+  },
+  "version": 1
+}

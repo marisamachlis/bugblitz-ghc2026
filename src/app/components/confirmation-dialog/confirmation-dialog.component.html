@@ -1,0 +1,11 @@
+<div class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="confirm-remove-title"
+  (click)="$event.stopPropagation()">
+  @if (clearCart()) {
+    <h3 id="confirm-remove-title">Are you sure? This will empty your cart.</h3>
+    <p>Keep your items and receive 20% off of today's order with code GHC2026!</p>
+  }
+  <div class="confirm-actions">
+    <button class="btn-secondary" (click)="cancel()">Keep Items</button>
+    <button class="btn-primary" (click)="confirm()">Clear Cart</button>
+  </div>
+</div>

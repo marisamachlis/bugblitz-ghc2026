@@ -1,0 +1,126 @@
+<!-- 
+============================================================================
+ℹ️ WORKSHOP SETUP: Toggle between Mock or Live data, team selection.
+⚠️ DO NOT LOOK HERE FOR BUGS: This file is part of the workshop setup, not the exercise challenges!
+============================================================================ 
+-->
+<div class="mode-dropdown-container" [class.inline]="inline">
+    <button
+    type="button"
+    class="mock-badge"
+    [class.active-mock]="apiMode.mock()"
+    [class.active-supabase]="!apiMode.mock()"
+    [class.is-open]="isPopoverOpen()"
+    (click)="togglePopover()"
+    [title]="apiMode.mock() ? 'Local mock API selected — simulated data' : 'Live Supabase backend selected'"
+    [attr.aria-label]="apiMode.mock() ? 'Workshop Mode: Mock API' : 'Workshop Mode: Live Supabase'"
+    aria-haspopup="true"
+    [attr.aria-expanded]="isPopoverOpen()"
+    >
+    @if (apiMode.mock()) {
+      <span aria-hidden="true">🟠</span>
+    } @else {
+      <span aria-hidden="true">🌐</span>
+    }
+    <span class="mode-label-full" aria-hidden="true">{{ apiMode.mock() ? 'Workshop Mode: Mock API' : 'Workshop Mode: Live Supabase' }}</span>
+    <span class="mode-label-compact" aria-hidden="true">{{ apiMode.mock() ? 'Mode: Mock API' : 'Mode: Live Supabase' }}</span>
+    <span class="badge-caret-wrapper">
+        <svg 
+        class="badge-caret-icon" 
+        viewBox="0 0 20 20" 
+        fill="currentColor" 
+        aria-hidden="true"
+        >
+        <path 
+            fill-rule="evenodd" 
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" 
+            clip-rule="evenodd" 
+        />
+        </svg>
+    </span>
+    </button>
+
+    @if (isPopoverOpen()) {
+    <div class="mode-popover">
+        <div class="popover-title">Data Source Configuration</div>
+        
+        <p class="popover-desc">
+        @if (apiMode.mock()) {
+            Running on the local mock API server. Orders are kept in memory and reset when the server restarts.
+        } @else {
+            Live Supabase is selected as the data source. Database updates are shared {{ teamId ? 'with your team.' : 'with other participants who haven’t selected a team.' }}
+        }
+        </p>
+
+        <hr class="popover-divider" />
+
+        @if (!apiMode.mock()) {
+        <div class="action-card mock-target">
+            <span class="card-label">
+            ⚠️ Network requests blocked by a firewall or VPN policy?
+            </span>
+            <button
+            type="button"
+            class="switch-mode-btn btn-amber"
+            (click)="switchMode(true)"
+            >
+            Switch to Mock API
+            </button>
+        </div>
+        } @else {
+        <div class="action-card supabase-target">
+            <span class="card-label">
+            🌐 On a personal laptop or unrestricted network?
+            </span>
+            <button
+            type="button"
+            class="switch-mode-btn btn-blue"
+            (click)="switchMode(false)"
+            >
+            Switch to Live Supabase
+            </button>
+        </div>
+        }
+    </div>
+    }
+</div>
+
+<div class="mode-dropdown-container team-container" [class.inline]="inline">
+  <button type="button" class="mock-badge team-badge"
+    [class.team-none]="!teamId" [class.team-selected]="!!teamId"
+    [class.is-open]="isTeamPopoverOpen()" [attr.aria-expanded]="isTeamPopoverOpen()"
+    (click)="toggleTeamPopover()">
+    <span>Team: {{ teamId || 'None' }}</span>
+    <span class="badge-caret-wrapper" aria-hidden="true">
+      <svg class="badge-caret-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
+      </svg>
+    </span>
+  </button>
+  @if (isTeamPopoverOpen()) {
+    <div class="mode-popover">
+      <div class="popover-title">Team selection</div>
+      <p class="popover-desc">
+        @if (apiMode.mock()) {
+          @if (teamId) {
+            Running on the local mock API. Data and orders aren’t shared with your team.
+            <strong>Team {{ teamId }}</strong> is selected and ready if you switch to <strong>Live Supabase</strong>.
+          } @else {
+            <strong>Mock API</strong> mode doesn't use your team's shared database. Select your team now so it's ready if you switch to <strong>Live Supabase</strong>.
+          }
+        } @else if (teamId) {
+          You're sharing a database with Team {{ teamId }}.
+        } @else {
+          <strong>No team selected.</strong> Your database is shared with other participants who haven’t selected a team.
+        }
+      </p>
+      <form class="team-form" (submit)="selectTeam($event, teamInput)">
+        <label><span>{{ teamId ? 'Switch your team' : 'Select your team' }}</span>
+          <input #teamInput type="number" inputmode="numeric" min="1" [max]="maxTeamNumber" step="1" required
+            [value]="teamId || ''" autocomplete="off" />
+        </label>
+        <button type="submit" class="switch-mode-btn btn-green">Set team</button>
+      </form>
+    </div>
+  }
+</div>

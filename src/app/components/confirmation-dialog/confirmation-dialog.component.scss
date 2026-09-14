@@ -1,0 +1,63 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.confirm-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2002;
+  pointer-events: auto;
+  
+  width: calc(100% - 32px);
+  max-width: 340px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e8e0d8;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.confirm-dialog h3 {
+  margin: 0 0 8px;
+  color: #1b4332;
+  font-size: 18px;
+}
+
+.confirm-dialog p {
+  margin: 0 0 16px;
+  color: #52796f;
+  font-size: 14px;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-secondary,
+.btn-primary {
+  flex: 1;
+  padding: 11px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: none;
+  border: 1px solid #2d6a4f;
+  color: #2d6a4f;
+}
+
+.btn-primary {
+  background: #2d6a4f;
+  border: 1px solid #2d6a4f;
+  color: #ffffff;
+}

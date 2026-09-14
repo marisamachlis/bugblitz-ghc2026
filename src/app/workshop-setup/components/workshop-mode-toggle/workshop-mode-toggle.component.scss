@@ -1,0 +1,297 @@
+// ============================================================================
+// ℹ️ WORKSHOP SETUP: Toggle between Mock or Live data, team selection.
+// ⚠️ DO NOT LOOK HERE FOR BUGS: This file is part of the workshop setup, not the exercise challenges!
+// ============================================================================ 
+
+.mode-dropdown-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 4px 6px 4px 12px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Active Mock Mode Pill */
+  &.active-mock {
+    background: #fff3cd;
+    color: #755400;
+    border-color: rgba(117, 84, 0, 0.25);
+
+    &:hover {
+      background: #ffe8a1;
+      box-shadow: 0 2px 6px rgba(117, 84, 0, 0.12);
+    }
+
+    .badge-caret-wrapper {
+      background: rgba(117, 84, 0, 0.12);
+      color: #755400;
+    }
+  }
+
+  /* Encourage team selection without blocking participation. */
+  &.team-none {
+    background: #fff1f2;
+    color: #9f3546;
+    border-color: rgba(159, 53, 70, 0.25);
+
+    &:hover {
+      background: #ffe4e6;
+      box-shadow: 0 2px 6px rgba(159, 53, 70, 0.12);
+    }
+
+    .badge-caret-wrapper {
+      background: rgba(159, 53, 70, 0.12);
+      color: #9f3546;
+    }
+  }
+
+  /* Selected team */
+  &.team-selected {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: rgba(71, 85, 105, 0.25);
+
+    &:hover {
+      background: #e2e8f0;
+      box-shadow: 0 2px 6px rgba(71, 85, 105, 0.12);
+    }
+
+    .badge-caret-wrapper {
+      background: rgba(71, 85, 105, 0.12);
+      color: #475569;
+    }
+  }
+
+  /* Active Live Supabase Mode Pill */
+  &.active-supabase {
+    background: #dbeafe;
+    color: #1e40af;
+    border-color: rgba(30, 64, 175, 0.25);
+
+    &:hover {
+      background: #bfdbfe;
+      box-shadow: 0 2px 6px rgba(30, 64, 175, 0.12);
+    }
+
+    .badge-caret-wrapper {
+      background: rgba(30, 64, 175, 0.12);
+      color: #1e40af;
+    }
+  }
+
+  /* Caret Icon Wrapper */
+  .badge-caret-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: transform 0.2s ease, background 0.15s ease;
+
+    .badge-caret-icon {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  /* Rotate Arrow When Dropdown is Active */
+  &.is-open {
+    .badge-caret-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.mode-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 280px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  animation: popover-fade 0.15s ease;
+
+  .popover-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1b4332;
+    margin-bottom: 6px;
+  }
+
+  .popover-desc {
+    font-size: 12px;
+    color: #52796f;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .popover-divider {
+    border: 0;
+    border-top: 1px solid #f1f5f9;
+    margin: 12px 0;
+  }
+}
+
+.action-card {
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  &.mock-target {
+    background: #fffaf5;
+    border: 1px dashed #fed7aa;
+
+    .card-label {
+      color: #7c2d12;
+    }
+  }
+
+  &.supabase-target {
+    background: #dbeafe;
+    border: 1px dashed #93c5fd;
+
+    .card-label {
+      color: #1e40af;
+    }
+  }
+}
+
+.switch-mode-btn {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.10s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &.btn-amber {
+    background: #fdc38a;
+    color: #7c2d12;
+    border: 1px solid #f97316;
+
+    &:hover {
+      background: #fb923c;
+      border-color: #ea580c;
+      box-shadow: 0 2px 6px rgba(249, 115, 22, 0.25);
+    }
+  }
+
+  &.btn-blue {
+    background: #1e40af;
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      background: #1e3a8a;
+      box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25);
+    }
+  }
+
+  &.btn-green {
+    background: #1b4332;
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      background: #2d6a4f;
+      box-shadow: 0 2px 8px rgba(27, 67, 50, 0.25);
+    }
+  }
+}
+
+@keyframes popover-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mode-label-compact { display: none; }
+
+@media (max-width: 1400px) {
+  .mode-label-full { display: none; }
+  .mode-label-compact { display: inline; }
+  .mock-badge { letter-spacing: normal; gap: 4px; }
+}
+
+@media (max-width: 760px) {
+  .mode-popover {
+    left: auto;
+    right: 0;
+    width: min(280px, calc(100vw - 32px));
+  }
+}
+
+.mode-dropdown-container.inline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .mode-label-full { display: inline; }
+  .mode-label-compact { display: none; }
+  .mock-badge { max-width: 100%; white-space: normal; text-align: left; }
+  .mode-popover { position: static; width: 100%; margin-top: 8px; box-shadow: none; }
+}
+
+:host { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.team-badge > span:first-child { max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
+.team-form {
+  display: grid;
+  grid-template-columns: 80px 80px;
+  align-items: end;
+  gap: 6px 6px;
+  margin: 12px 0;
+  label { display: contents; font-size: 12px; color: #1b4332; font-weight: 600; }
+  label > span { grid-column: 1 / -1; }
+  input { box-sizing: border-box; width: 80px; height: 32px; padding: 6px 8px; border: 1px solid #94a3b8; border-radius: 6px; font: inherit; }
+  .switch-mode-btn { width: auto; height: 32px; padding: 6px 10px; white-space: nowrap; }
+}
+.team-container.inline { width: 100%; }
+.mode-popover { box-sizing: border-box; }
+
+.mode-status-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}

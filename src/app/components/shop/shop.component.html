@@ -1,0 +1,79 @@
+<div class="shop-layout" [class.sidebar-collapsed]="sidebarCollapsed()">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2 class="sidebar-title">REFINE YOUR SEARCH</h2>
+      <button class="sidebar-toggle" (click)="sidebarCollapsed.set(!sidebarCollapsed())" [title]="sidebarCollapsed() ? 'Show filters' : 'Hide filters'">
+        <span class="toggle-icon" [class.collapsed]="sidebarCollapsed()">&#171;</span>
+      </button>
+    </div>
+
+    <div class="sidebar-body">
+      @for (group of filterGroups; track group.key) {
+        <div class="filter-group">
+          <button class="group-header" (click)="group.expanded = !group.expanded">
+            <span>{{ group.label }}</span>
+            <span class="chevron" [class.open]="group.expanded">&#8964;</span>
+          </button>
+          @if (group.expanded) {
+            <div class="group-options">
+              @for (opt of group.options; track opt.value) {
+                <label class="option-row">
+                  <input
+                    type="checkbox"
+                    [checked]="isActive(group.key, opt.value)"
+                    (change)="toggleFilter(group.key, opt.value)"
+                  />
+                  <span class="option-label">{{ opt.label }}</span>
+                </label>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="filter-bar">
+      <div class="filter-bar-top">
+        <h1 class="results-heading">
+          {{ pageHeading }}
+          <span class="results-count">({{ filteredItems().length }} Results)</span>
+        </h1>
+      </div>
+      <div class="active-chips">
+        @if (searchQuery()) {
+          <span class="active-chip">
+            "{{ searchQuery() }}"
+          </span>
+        }
+        @for (chip of activeChips(); track chip.key + chip.value) {
+          <span class="active-chip">
+            {{ chip.label }}
+            <button class="chip-remove" (click)="toggleFilter(chip.key, chip.value)">&#10005;</button>
+          </span>
+        }
+        @if (hasActiveFilters()) {
+          <button class="clear-all-btn" (click)="clearAll()">Clear All</button>
+        }
+      </div>
+    </div>
+
+    @if (loading()) {
+      <div class="loading-state">Loading products...</div>
+    } @else if (error()) {
+      <div class="error-state">Failed to load products: {{ error() }}</div>
+    } @else if (filteredItems().length === 0) {
+      <div class="empty-state">
+        <p>No products match your filters.</p>
+      </div>
+    } @else {
+      <div class="product-grid">
+        @for (item of filteredItems(); track item.id) {
+          <app-product-card [product]="item" />
+        }
+      </div>
+    }
+  </main>
+</div>

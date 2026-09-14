@@ -1,0 +1,65 @@
+<div class="orders-page">
+  <section class="orders-intro">
+    <p class="eyebrow">Order lookup</p>
+    <h1>My Orders</h1>
+    <p>Enter the email address you used at checkout to see your orders.</p>
+  </section>
+
+  <form class="lookup-form" (ngSubmit)="findOrders($event)">
+    <label for="order-email">Email address</label>
+    <div class="lookup-controls">
+      <input
+        id="order-email"
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="jane@example.com"
+        autocomplete="email"
+        required
+      />
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Looking up…' : 'View Orders' }}
+      </button>
+    </div>
+    <p class="workshop-note">Use the email from your checkout confirmation.</p>
+    @if (errorMessage()) {
+      <p class="error" role="alert">{{ errorMessage() }}</p>
+    }
+  </form>
+
+  @if (searched() && !loading() && !errorMessage() && orders().length === 0) {
+    <section class="empty-state">
+      <h2>No orders found</h2>
+      <a routerLink="/shop">Shop plants</a>
+    </section>
+  }
+
+  @if (orders().length > 0) {
+    <section class="orders-list" aria-live="polite">
+      <h2>{{ orders().length }} order{{ orders().length === 1 ? '' : 's' }} for {{ email.trim() }}</h2>
+      @for (order of orders(); track order.id) {
+        <article class="order-card">
+          <header class="order-header">
+            <div>
+              <p class="order-date">Placed {{ order.created_at | date:'MMMM d, y, h:mm a' }}</p>
+              <p class="order-id">Order #{{ order.id.slice(0, 8).toUpperCase() }}</p>
+            </div>
+            <div class="order-total">
+              <span class="status">{{ order.status }}</span>
+              <strong>{{ order.total | currency }}</strong>
+            </div>
+          </header>
+          <div class="order-items">
+            @for (item of order.items; track item.id) {
+              <div class="order-item">
+                <span>{{ item.product_name }}</span>
+                <span>Qty {{ item.quantity }}</span>
+                <strong>{{ item.price * item.quantity | currency }}</strong>
+              </div>
+            }
+          </div>
+        </article>
+      }
+    </section>
+  }
+</div>

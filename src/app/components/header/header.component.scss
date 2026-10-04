@@ -271,6 +271,6 @@
 }
 
 @media (min-width: 450px) and (max-width: 1000px) {
-  .desktop-mode { display: block; }
+  .desktop-mode { display: flex; }
   .mobile-workshop { display: none; }
 }

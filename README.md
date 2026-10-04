@@ -128,7 +128,11 @@ If Path B works for you, these additional Make targets are available:
 
 ## Switching teams
 
-Add your assigned team number to the preview URL, for example:
+Use the **Team** toggle in the header next to the API mode badge to enter your assigned team number.
+**Team: None** shares live data with other participants who haven’t selected a team.
+If you are in Mock API mode, data is not shared with your team.
+
+You can also add your team number to the URL, for example:
 `http://localhost:4200/?team=<id>` and press **Enter** to load that team.
 
 You can also update the default team configured in

@@ -33,10 +33,22 @@ An explicit `mock=true` or `mock=false` overrides that default.
 Mock mode uses sample products and coupons. Orders come from your local
 checkout activity and can be looked up by email. Orders are cleared when the server restarts.
 
+## Facilitator configuration
+
+The team selector limit is maintained in [`workshop.config.ts`](./workshop.config.ts).
+Facilitators can update `WORKSHOP_CONFIG.maxTeamNumber` (currently 50) when the
+available teams change. This setting is outside participant environment setup
+and the bug exercises.
+
+This is a client-side selector limit, not an access-control boundary. Anyone
+editing their own copy of the source can change it; database access must be
+controlled on the backend.
+
 ## Files in this folder
 
 | Path | Purpose |
 |------|---------|
+| `workshop.config.ts` | Facilitator-maintained team selector limit |
 | `services/api-mode.service.ts` | Selects live or mock mode |
 | `services/mock-store.service.ts` | Mock HTTP adapter |
 | `components/workshop-mode-toggle/` | Header menu for switching modes |

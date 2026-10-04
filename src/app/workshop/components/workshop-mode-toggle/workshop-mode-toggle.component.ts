@@ -4,6 +4,8 @@
 // ============================================================================ 
 
 import { Component, ElementRef, HostListener, Input, inject, signal } from '@angular/core';
+import { WORKSHOP_CONFIG } from '../../workshop.config';
+import { getTeamId } from '../../../data/db';
 import { CommonModule } from '@angular/common';
 import { ApiModeService } from '../../services/api-mode.service';
 
@@ -19,9 +21,29 @@ export class WorkshopModeToggleComponent {
   readonly apiMode = inject(ApiModeService);
   private elementRef = inject(ElementRef);
 
+  readonly teamId = getTeamId();
+  readonly maxTeamNumber = WORKSHOP_CONFIG.maxTeamNumber;
+  isTeamPopoverOpen = signal(false);
   isPopoverOpen = signal(false);
 
+  toggleTeamPopover(): void {
+    this.isPopoverOpen.set(false);
+    this.isTeamPopoverOpen.update(open => !open);
+  }
+
+  selectTeam(event: Event, input: HTMLInputElement): void {
+    event.preventDefault();
+    if (input.reportValidity()) this.switchTeam(String(input.valueAsNumber));
+  }
+
+  switchTeam(team: string): void {
+    const url = new URL(window.location.href);
+    url.searchParams.set('team', team);
+    window.location.href = url.toString();
+  }
+
   togglePopover(): void {
+    this.isTeamPopoverOpen.set(false);
     this.isPopoverOpen.update(open => !open);
   }
 
@@ -35,11 +57,13 @@ export class WorkshopModeToggleComponent {
   onDocumentClick(event: MouseEvent): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.isPopoverOpen.set(false);
+      this.isTeamPopoverOpen.set(false);
     }
   }
 
   @HostListener('document:keydown.escape')
-    onEscape(): void {
+  onEscape(): void {
     this.isPopoverOpen.set(false);
-    }
+    this.isTeamPopoverOpen.set(false);
+  }
 }

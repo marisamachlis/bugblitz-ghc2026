@@ -6,8 +6,8 @@ import { CATEGORY_IMAGES, PRODUCT_IMAGES } from './product-images';
 // No team means the shared public schema.
 export function getTeamId(): string | null {
   if (typeof window !== 'undefined') {
-    const queryTeam = new URLSearchParams(window.location.search).get('team')?.trim();
-    if (queryTeam) return queryTeam;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('team')) return params.get('team')?.trim() || null;
   }
 
   return String(environment.team ?? '').trim() || null;

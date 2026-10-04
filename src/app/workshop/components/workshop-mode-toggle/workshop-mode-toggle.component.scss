@@ -221,3 +221,19 @@
   .mock-badge { max-width: 100%; white-space: normal; text-align: left; }
   .mode-popover { position: static; width: 100%; margin-top: 8px; box-shadow: none; }
 }
+
+:host { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.team-badge > span:first-child { max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
+.team-form {
+  display: grid;
+  grid-template-columns: 64px max-content;
+  align-items: end;
+  gap: 6px 6px;
+  margin: 12px 0;
+  label { display: contents; font-size: 12px; color: #1b4332; font-weight: 600; }
+  label > span { grid-column: 1 / -1; }
+  input { box-sizing: border-box; width: 64px; height: 32px; padding: 6px 8px; border: 1px solid #94a3b8; border-radius: 6px; font: inherit; }
+  .switch-mode-btn { width: auto; height: 32px; padding: 6px 10px; white-space: nowrap; }
+}
+.team-container.inline { width: 100%; }
+.mode-popover { box-sizing: border-box; }

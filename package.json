@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "node workshop/dev-mock.mjs",
+    "start": "node workshop-setup/dev-mock.mjs",
     "build": "ng build",
-    "dev:mock-server": "node workshop/mock-api-server.mjs",
+    "dev:mock-server": "node workshop-setup/mock-api-server.mjs",
     "dev:ui-only": "echo '⚠️ WARNING: Mock API server is NOT running. Run \"npm start\" instead if you need local mock mode.' && ng serve"
   },
   "dependencies": {

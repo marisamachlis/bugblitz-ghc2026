@@ -2,7 +2,7 @@
 
 These files support running and setting up the workshop and are outside the bug exercises.
 This folder contains Angular runtime code. Node tooling lives in the root
-[`workshop/`](../../../workshop/) folder. Both are outside the bug exercises.
+[`workshop-setup/`](../../../workshop-setup/) folder. Both are outside the bug exercises.
 
 For the exercises, start with [`../components/`](../components/) and
 [`../services/`](../services/).
@@ -26,9 +26,10 @@ Use the **Workshop Mode** menu in the app header, or open:
 - **Mock API:** http://localhost:4200/?mock=true
 - **Live Supabase:** http://localhost:4200/?mock=false
 
-Without a `mock` query parameter, the app uses `environment.mock` in
-[`src/environments/environment.ts`](../../environments/environment.ts).
-An explicit `mock=true` or `mock=false` overrides that default.
+Team and data mode are selected through URL query parameters, which the header
+controls update. Without `mock=true`, the app selects Live Supabase. Without a
+nonempty `team` parameter, no team is selected and live data uses the shared
+public database. These selections are not configured in `environment.ts`.
 
 Mock mode uses sample products and coupons. Orders come from your local
 checkout activity and can be looked up by email. Orders are cleared when the server restarts.

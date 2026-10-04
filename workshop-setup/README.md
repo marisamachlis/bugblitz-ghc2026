@@ -2,7 +2,7 @@
 
 This folder contains the local Node mock API and development tooling, outside
 the bug exercises. Angular workshop components and services live in
-[`src/app/workshop/`](../src/app/workshop/).
+[`src/app/workshop-setup/`](../src/app/workshop-setup/).
 
 Run `npm start` from the repository root. The launcher starts Angular on port
 4200 before the mock API on port 4300 so StackBlitz previews the app first.
@@ -18,7 +18,7 @@ Run `npm start` from the repository root. The launcher starts Angular on port
 Run the checks from the repository root:
 
 ```bash
-node --test workshop/*.test.mjs
+node --test workshop-setup/*.test.mjs
 ```
 
-See [workshop setup](../src/app/workshop/README.md) for selecting live or mock mode.
+See [workshop setup](../src/app/workshop-setup/README.md) for selecting live or mock mode.

@@ -10,7 +10,7 @@ export function getTeamId(): string | null {
     if (params.has('team')) return params.get('team')?.trim() || null;
   }
 
-  return String(environment.team ?? '').trim() || null;
+  return null;
 }
 
 const NUMERIC_KEYS = ['price', 'compare_at_price', 'rating', 'total'];

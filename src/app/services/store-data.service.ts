@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { ApiModeService } from '../workshop/services/api-mode.service';
+import { ApiModeService } from '../workshop-setup/services/api-mode.service';
 import { Category, Coupon, Product, OrderWithItems } from '../models/types';
-import { MockApiStoreDataSource } from '../workshop/services/mock-store.service';
+import { MockApiStoreDataSource } from '../workshop-setup/services/mock-store.service';
 import { SupabaseStoreDataSource } from '../data/supabase-store.service';
 
 export interface CreateOrder {

@@ -46,7 +46,6 @@ If a corporate firewall blocks connections to Supabase, switch to the local Mock
 
 * **In the App Nav Bar:** Click the **Workshop Mode: Live Supabase** badge and select **Switch to Mock API**.
 * **Via URL:** Append `&mock=true` to your URL (e.g., `http://localhost:4200/?team=<team_number>&mock=true`).
-* **Environment Default:** Set `mock: true` in `src/environments/environment.ts`.
 
 > **Note:** Look for the **Workshop Mode: Mock API** badge to confirm mock mode is active.
 
@@ -111,7 +110,6 @@ npm start         # start the dev server at http://localhost:4200
 |-----------------|--------------|
 | `npm install`   | Install project dependencies |
 | `npm start`     | Start the app on port 4200 and local mock API on port 4300 |
-| `npm run start:app-only` | Start Angular only (no mock server) |
 | `npm run build` | Production build |
 
 ### Make targets (Path B only)
@@ -129,16 +127,14 @@ If Path B works for you, these additional Make targets are available:
 ## Switching teams
 
 Use the **Team** toggle in the header next to the API mode badge to enter your assigned team number.
-**Team: None** shares live data with other participants who haven’t selected a team.
+**Team: None** means you haven't selected a team. If no team is selected, the app shares live data with other participants who haven’t selected a team.
 If you are in Mock API mode, data is not shared with your team.
 
 You can also add your team number to the URL, for example:
 `http://localhost:4200/?team=<id>` and press **Enter** to load that team.
 
-You can also update the default team configured in
-[`src/environments/environment.ts`](src/environments/environment.ts).
-
-> Note that the `?team=<id>` URL parameter overrides the default.
+The header controls save team and data mode selections in the URL. Without query
+parameters, the app starts with no team selected and Live Supabase selected.
 
 ## Try it in StackBlitz
 
@@ -153,11 +149,8 @@ src/
 │   ├── data/       # Supabase client, data adapter, and product metadata
 │   ├── models/     # Shared application interfaces
 │   ├── services/   # Storefront state, behavior, and shared data service
-│   └── workshop/  # Angular workshop setup — outside the bug exercises
-│       ├── components/workshop-mode-toggle/
-│       └── services/ # Mode selection and mock HTTP adapter
-├── environments/  # Supabase connection, default team, and default mode
+│   └── workshop-setup/  # Workshop setup. Don't look here for bugs
+├── environments/  # Supabase connection settings
 └── main.ts        # Application bootstrap and routes
-workshop/          # Workshop setup, node mock server - outside of bug exercises
-Makefile           # Local setup and development scripts
+workshop-setup/    # Workshop setup. Don't look here for bugs
 ```

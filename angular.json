@@ -78,7 +78,7 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "proxyConfig": "workshop/mock-api.proxy.json"
+            "proxyConfig": "workshop-setup/mock-api.proxy.json"
           },
           "configurations": {
             "development": {

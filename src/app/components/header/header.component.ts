@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { StoreDataService } from '../../services/store-data.service';
 import { Product } from '../../models/types';
-import { WorkshopModeToggleComponent } from '../../workshop/components/workshop-mode-toggle/workshop-mode-toggle.component';
+import { WorkshopModeToggleComponent } from '../../workshop-setup/components/workshop-mode-toggle/workshop-mode-toggle.component';
 
 @Component({
   selector: 'app-header',

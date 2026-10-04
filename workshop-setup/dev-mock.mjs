@@ -37,7 +37,7 @@ app.on('error', error => { console.error(error.message); stop(); process.exit(1)
 try {
   await waitForApp();
   if (!stopped) {
-    api = spawn(process.execPath, ['workshop/mock-api-server.mjs'], { stdio: 'inherit' });
+    api = spawn(process.execPath, ['workshop-setup/mock-api-server.mjs'], { stdio: 'inherit' });
   }
 } catch (error) {
   console.error(error.message);

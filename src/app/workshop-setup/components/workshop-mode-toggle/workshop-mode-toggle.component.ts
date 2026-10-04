@@ -1,5 +1,5 @@
 // ============================================================================
-// ℹ️ WORKSHOP SETUP: Toggle between Mock or Live data.
+// ℹ️ WORKSHOP SETUP: Toggle between Mock or Live data, team selection.
 // ⚠️ DO NOT LOOK HERE FOR BUGS: This file is part of the workshop setup, not the exercise challenges!
 // ============================================================================ 
 

@@ -4,7 +4,6 @@
 // ============================================================================ 
 
 import { Injectable, signal } from '@angular/core';
-import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ApiModeService {
@@ -29,6 +28,6 @@ export class ApiModeService {
       const params = new URLSearchParams(window.location.search);
       if (params.has('mock')) return params.get('mock') === 'true';
     }
-    return environment.mock;
+    return false;
   }
 }

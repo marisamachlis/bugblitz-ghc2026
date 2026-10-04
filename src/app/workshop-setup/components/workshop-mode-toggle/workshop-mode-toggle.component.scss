@@ -1,3 +1,8 @@
+// ============================================================================
+// ℹ️ WORKSHOP SETUP: Toggle between Mock or Live data, team selection.
+// ⚠️ DO NOT LOOK HERE FOR BUGS: This file is part of the workshop setup, not the exercise challenges!
+// ============================================================================ 
+
 .mode-dropdown-container {
   position: relative;
   display: inline-flex;
@@ -40,20 +45,54 @@
     }
   }
 
-  /* Active Live Supabase Mode Pill */
-  &.active-supabase {
-    background: #ecfdf5;
-    color: #046c4e;
-    border-color: rgba(4, 108, 78, 0.25);
+  /* Encourage team selection without blocking participation. */
+  &.team-none {
+    background: #fff1f2;
+    color: #9f3546;
+    border-color: rgba(159, 53, 70, 0.25);
 
     &:hover {
-      background: #d1fae5;
-      box-shadow: 0 2px 6px rgba(4, 108, 78, 0.12);
+      background: #ffe4e6;
+      box-shadow: 0 2px 6px rgba(159, 53, 70, 0.12);
     }
 
     .badge-caret-wrapper {
-      background: rgba(4, 108, 78, 0.12);
-      color: #046c4e;
+      background: rgba(159, 53, 70, 0.12);
+      color: #9f3546;
+    }
+  }
+
+  /* Selected team */
+  &.team-selected {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: rgba(71, 85, 105, 0.25);
+
+    &:hover {
+      background: #e2e8f0;
+      box-shadow: 0 2px 6px rgba(71, 85, 105, 0.12);
+    }
+
+    .badge-caret-wrapper {
+      background: rgba(71, 85, 105, 0.12);
+      color: #475569;
+    }
+  }
+
+  /* Active Live Supabase Mode Pill */
+  &.active-supabase {
+    background: #dbeafe;
+    color: #1e40af;
+    border-color: rgba(30, 64, 175, 0.25);
+
+    &:hover {
+      background: #bfdbfe;
+      box-shadow: 0 2px 6px rgba(30, 64, 175, 0.12);
+    }
+
+    .badge-caret-wrapper {
+      background: rgba(30, 64, 175, 0.12);
+      color: #1e40af;
     }
   }
 
@@ -131,7 +170,7 @@
 
   &.mock-target {
     background: #fffaf5;
-    border: 1px dashed #fed7aa; 
+    border: 1px dashed #fed7aa;
 
     .card-label {
       color: #7c2d12;
@@ -139,11 +178,11 @@
   }
 
   &.supabase-target {
-    background: #f0fdf4;
-    border: 1px dashed #bbf7d0;
+    background: #dbeafe;
+    border: 1px dashed #93c5fd;
 
     .card-label {
-      color: #14532d;
+      color: #1e40af;
     }
   }
 }
@@ -173,6 +212,17 @@
     }
   }
 
+  &.btn-blue {
+    background: #1e40af;
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      background: #1e3a8a;
+      box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25);
+    }
+  }
+
   &.btn-green {
     background: #1b4332;
     color: #ffffff;
@@ -198,7 +248,7 @@
 
 .mode-label-compact { display: none; }
 
-@media (max-width: 1350px) {
+@media (max-width: 1400px) {
   .mode-label-full { display: none; }
   .mode-label-compact { display: inline; }
   .mock-badge { letter-spacing: normal; gap: 4px; }
@@ -226,14 +276,22 @@
 .team-badge > span:first-child { max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
 .team-form {
   display: grid;
-  grid-template-columns: 64px max-content;
+  grid-template-columns: 80px 80px;
   align-items: end;
   gap: 6px 6px;
   margin: 12px 0;
   label { display: contents; font-size: 12px; color: #1b4332; font-weight: 600; }
   label > span { grid-column: 1 / -1; }
-  input { box-sizing: border-box; width: 64px; height: 32px; padding: 6px 8px; border: 1px solid #94a3b8; border-radius: 6px; font: inherit; }
+  input { box-sizing: border-box; width: 80px; height: 32px; padding: 6px 8px; border: 1px solid #94a3b8; border-radius: 6px; font: inherit; }
   .switch-mode-btn { width: auto; height: 32px; padding: 6px 10px; white-space: nowrap; }
 }
 .team-container.inline { width: 100%; }
 .mode-popover { box-sizing: border-box; }
+
+.mode-status-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}

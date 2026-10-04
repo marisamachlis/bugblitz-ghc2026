@@ -42,7 +42,7 @@ for (const cancel of [false, true]) {
     await completion;
     assert.equal(children.length, cancel ? 1 : 2);
     if (!cancel) {
-      assert.equal(children[1].args[0], 'workshop/mock-api-server.mjs');
+      assert.equal(children[1].args[0], 'workshop-setup/mock-api-server.mjs');
       processStub.emit('SIGTERM');
       assert.equal(children[1].killed, true);
     }
